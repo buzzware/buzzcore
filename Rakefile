@@ -12,34 +12,11 @@ begin
     gem.authors = ["buzzware"]
     #gem.rubyforge_project = "buzzware"
     gem.add_development_dependency "thoughtbot-shoulda"
-		require 'ruby-debug'; debugger
 		gem.files.include %w(
 			lib/buzzcore.rb
 		)
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
-
-	#"buzzcore.gemspec",
-	#"History.txt",
-	#"lib/buzzcore/config.rb",
-	#"lib/buzzcore/database_utils.rb",
-	#"lib/buzzcore/enum.rb",
-	#"lib/buzzcore/extend_base_classes.rb",
-	#"lib/buzzcore/logging.rb",
-	#"lib/buzzcore/misc_utils.rb",
-	#"lib/buzzcore/require_paths.rb",
-	#"lib/buzzcore/shell_extras.rb",
-	#"lib/buzzcore/string_utils.rb",
-	#"lib/buzzcore/text_doc.rb",
-	#"lib/buzzcore/thread_utils.rb",
-	#"lib/buzzcore/xml_utils.rb",
-	#"LICENSE",
-	#"Manifest.txt",
-	#"README.textile",
-	#"test/config_test.rb",
-	#"test/credentials_test.rb",
-	#"test/shell_test.rb"
-
   Jeweler::RubyforgeTasks.new do |rubyforge|
     rubyforge.doc_task = "rdoc"
   end
