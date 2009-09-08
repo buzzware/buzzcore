@@ -118,7 +118,7 @@ class ConfigXmlClass < ConfigClass
 	def initialize(aDefaultValues,aConfig)
 		return super(aDefaultValues,aConfig) unless aConfig.is_a?(REXML::Element)
 		@xmlRoot = aConfig.deep_clone
-		super(aDefaultValues,XmlUtils.read_simple_items(@xmlRoot,'/Yore/SimpleItems'))
+		super(aDefaultValues,XmlUtils.read_simple_items(@xmlRoot,'SimpleItems').symbolize_keys)
 	end
 	
 	def self.from_file(aDefaultValues,aFile)
