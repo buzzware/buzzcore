@@ -122,7 +122,6 @@ class ConfigXmlClass < ConfigClass
 	end
 	
 	def self.from_file(aDefaultValues,aFile)
-		require 'ruby-debug'; debugger
 		xml = XmlUtils.get_file_root(aFile)
 		return ConfigXmlClass.new(aDefaultValues,xml)
 	end
