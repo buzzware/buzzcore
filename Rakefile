@@ -12,6 +12,10 @@ begin
     gem.authors = ["buzzware"]
     #gem.rubyforge_project = "buzzware"
     gem.add_development_dependency "thoughtbot-shoulda"
+		require 'ruby-debug'; debugger
+		gem.files.include %w(
+			lib/buzzcore.rb
+		)
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 

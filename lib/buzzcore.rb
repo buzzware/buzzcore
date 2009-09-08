@@ -1,1 +1,2 @@
-Dir.glob(File.join(File.dirname(__FILE__), 'buzzcore/*.rb')).each {|f| require f }
+Dir.chdir(File.dirname(__FILE__)) { Dir['buzzcore/*'] }.each {|f| require f }
+
