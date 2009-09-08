@@ -12,5 +12,17 @@ module ::Kernel
 			$LOAD_PATH << aPath unless $LOAD_PATH.include?(aPath)
 		end
 	end
+	
+	def require_paths_first(*aArgs)
+	  caller_dir = File.dirname(File.expand_path(caller.first.sub(/:[0-9]+.*/,'')))
+		paths = []
+		aArgs.each do |aPath|
+			aPath = File.expand_path(aPath,caller_dir)
+			paths << aPath
+		end
+		paths.each do |p|
+			$LOAD_PATH.insert(0,p)
+		end
+	end
 end
 

@@ -1,6 +1,7 @@
 require 'net/http'
 require 'rexml/document'
 require 'rexml/xpath'
+require 'buzzcore/misc_utils'
 
 module XmlUtils
 
