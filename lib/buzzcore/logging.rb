@@ -1,5 +1,5 @@
 require 'logger'
-require 'ihl_ruby/misc_utils'
+require 'buzzcore/misc_utils'
 
 class Logger
   attr_reader :logdev

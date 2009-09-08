@@ -2,7 +2,7 @@ require 'tmpdir'
 require 'logger'
 require 'pathname'
 
-require 'ihl_ruby/logging'
+require 'buzzcore/logging'
 
 module MiscUtils
 

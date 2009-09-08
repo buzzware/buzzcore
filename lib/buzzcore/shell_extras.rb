@@ -1,7 +1,3 @@
-require 'rubygems'
-gem 'RequirePaths'; require 'require_paths'
-require_paths '.','..'
-
 gem 'Platform'; require 'platform'
 gem 'shairontoledo-popen4'; require 'popen4'
 

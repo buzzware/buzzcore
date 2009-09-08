@@ -1,8 +1,5 @@
-require 'rubygems'
-gem 'RequirePaths'; require 'require_paths'
-require_paths '..'
-require 'ihl_ruby/xml_utils'
-require 'ihl_ruby/extend_base_classes'
+require 'buzzcore/xml_utils'
+require 'buzzcore/extend_base_classes'
 
 class ConfigClass < Hash
 

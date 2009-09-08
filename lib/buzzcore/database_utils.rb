@@ -1,7 +1,4 @@
-require 'rubygems'
-gem 'RequirePaths'; require 'require_paths'
-require_paths '..'
-require 'ihl_ruby/shell_extras'
+require 'buzzcore/shell_extras'
 
 module DatabaseUtils
   def self.execute_sql_file(filename,aUser=nil,aPassword=nil)
