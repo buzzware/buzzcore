@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{buzzcore}
-  s.version = "0.2.2"
+  s.version = "0.2.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["buzzware"]
@@ -28,12 +28,10 @@ Gem::Specification.new do |s|
      "buzzcore.vpw",
      "lib/buzzcore.rb",
      "lib/buzzcore.rb",
-     "lib/buzzcore/cap_utils.rb",
      "lib/buzzcore/config.rb",
      "lib/buzzcore/database_utils.rb",
      "lib/buzzcore/enum.rb",
      "lib/buzzcore/extend_base_classes.rb",
-     "lib/buzzcore/ftp_extra.rb",
      "lib/buzzcore/logging.rb",
      "lib/buzzcore/misc_utils.rb",
      "lib/buzzcore/require_paths.rb",
