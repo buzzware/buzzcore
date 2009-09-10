@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{buzzcore}
-  s.version = "0.2.1"
+  s.version = "0.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["buzzware"]
-  s.date = %q{2009-09-09}
+  s.date = %q{2009-09-10}
   s.description = %q{buzzcore is the ruby core library developed and used by Buzzware Solutions.}
   s.email = %q{contact@buzzware.com.au}
   s.extra_rdoc_files = [
@@ -28,10 +28,12 @@ Gem::Specification.new do |s|
      "buzzcore.vpw",
      "lib/buzzcore.rb",
      "lib/buzzcore.rb",
+     "lib/buzzcore/cap_utils.rb",
      "lib/buzzcore/config.rb",
      "lib/buzzcore/database_utils.rb",
      "lib/buzzcore/enum.rb",
      "lib/buzzcore/extend_base_classes.rb",
+     "lib/buzzcore/ftp_extra.rb",
      "lib/buzzcore/logging.rb",
      "lib/buzzcore/misc_utils.rb",
      "lib/buzzcore/require_paths.rb",

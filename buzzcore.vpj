@@ -70,13 +70,11 @@
 	</CustomFolders>
 	<Files AutoFolders="DirectoryView">
 		<Folder Name="lib">
-			<Folder Name="buzzcore">
-				<F
-					N="lib/buzzcore/*"
-					Recurse="0"
-					Refilter="0"
-					Excludes=".svn/"/>
-			</Folder>
+			<F
+				N="lib/*"
+				Recurse="1"
+				Refilter="0"
+				Excludes=""/>
 		</Folder>
 		<Folder Name="test">
 			<F
