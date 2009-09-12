@@ -290,7 +290,12 @@ module MiscUtils
 			end
 		end
 	end
-
+	
+	# for capistrano deployed paths
+	# makes "/var/www/logikal.stage/releases/20090911073620/cms/config.xml" into "/var/www/logikal.stage/current/cms/config.xml"
+	def self.neaten_cap_path(aPath)
+		aPath.sub(/(\/releases\/[0-9]+\/)/,'/current/')
+	end
 
 	# takes a hash and returns a single closed tag containing the hash pairs as attributes, correctly encoded
 	def self.hash_to_xml_tag(aName,aHash)

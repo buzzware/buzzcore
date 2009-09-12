@@ -114,7 +114,7 @@ module XmlUtils
 	# reads the simple items format given either a filename or xml node
 	def self.read_config_values(aXmlConfig)
 		xmlRoot = aXmlConfig.is_a?(REXML::Element) ? aXmlConfig : get_file_root(aXmlConfig)
-		return read_simple_items(xmlRoot,'/Config/SimpleItems')
+		return read_simple_items(xmlRoot,'SimpleItems')
   end
 
 	# Takes a node or xml string and writes it out formatted nicely.
