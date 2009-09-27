@@ -48,6 +48,19 @@ module StringUtils
 		end
 	end
 
+	# given ('abcdefg','c.*?e') returns ['ab','cde','fg'] so you can manipulate the head, match and tail seperately, and potentially rejoin
+	def self.split3(aString,aPattern,aOccurence=0)
+		matches = aString.match(aPattern)
+		match = matches[aOccurence]
+		parts = [match.pre_match,match.to_s,match.post_match]
+
+		if !has_block?	# return head,match,tail
+			parts
+		else						# return string
+			parts[1] = yield *parts
+			parts.join
+		end
+	end
 
 end
 

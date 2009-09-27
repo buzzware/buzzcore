@@ -179,6 +179,25 @@ module XmlUtils
 			end
 		end
 	end
+	
+	# given a tag string, extracts the contents of an attribute using only a regex
+	def self.quick_att_from_tag(aTagStr,aAtt)
+		aTagStr.scan(/#{aAtt}=['"](.*?)['"]/).flatten.pop
+	end
+	
+	def self.quick_remove_att(aTagStr,aAtt)
+		aTagStr.sub(/#{aTagStr}=['"](.*?)['"]/,'')
+	end
+	
+	def self.quick_append_att(aTagStr,aAtt,aValue)
+		# replace first > or /> with att + ending
+		aTagStr.sub(/(>|\/>)/," #{aAtt}=\"#{aValue}\""+' \1')
+	end
+	
+	def self.quick_set_att(aTagStr,aAtt,aValue)
+		result = quick_remove_att(aTagStr,aAtt)
+		quick_append_att(result,aAtt,aValue)
+	end
 
 end
 
