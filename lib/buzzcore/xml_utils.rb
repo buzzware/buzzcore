@@ -186,7 +186,7 @@ module XmlUtils
 	end
 	
 	def self.quick_remove_att(aTagStr,aAtt)
-		aTagStr.sub(/#{aTagStr}=['"](.*?)['"]/,'')
+		aTagStr.sub(/#{aAtt}=['"](.*?)['"]/,'')
 	end
 	
 	def self.quick_append_att(aTagStr,aAtt,aValue)

@@ -79,6 +79,14 @@ String.class_eval do
 	def is_f?
 		self.to_float(false) and true
 	end
+	
+	# like scan but returns array of MatchData's.
+	# doesn't yet support blocks
+	def scan_md(aPattern)
+		result = []
+		self.scan(aPattern) {|s| result << $~ }		
+		result
+	end
   
 end  
 
