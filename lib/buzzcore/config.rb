@@ -113,6 +113,35 @@ class ConfigClass < Hash
 
 end
 
+# use like this :
+#
+# in initializer or environment.rb :
+#APP_CONFIG = ConfigXmlClass.from_file(
+#	SITE_CONFIG_DEFAULTS = {
+#		:something => String,									# giving a class means the type is the given class, and the default value is nil
+#		:session_key => '_session',
+#		:upload_path=> 'cms/uploads',
+#		:thumbs_cache => File.expand_path('public/thumbs_cache',RAILS_ROOT),	# make sure this exists with correct permissions
+#		:thumbs_url => '/thumbs_cache'
+#	},
+#	File.expand_path('config/config.xml',RAILS_ROOT)
+#)
+#
+# config/logikal.config.xml :
+#
+#<?xml version="1.0" encoding="UTF-8"?>
+#<Config>
+#	<SimpleItems>
+#		<Item Name="upload_path">../shared/uploads</Item>
+#		<Item Name="something">a value</Item>
+#	</SimpleItems>
+#</Config>
+#
+# then throughout app eg. :
+# 
+# ... APP_CONFIG[:upload_path]
+#
+
 class ConfigXmlClass < ConfigClass
 	attr_accessor :xmlRoot
 	def initialize(aDefaultValues,aConfig)
