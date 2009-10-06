@@ -4,7 +4,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "buzzware-buzzcore"
+    gem.name = "buzzcore"
     gem.summary = %Q{buzzcore is the ruby core library developed and used by Buzzware Solutions.}
     gem.description = %Q{buzzcore is the ruby core library developed and used by Buzzware Solutions.}
     gem.email = "contact@buzzware.com.au"
