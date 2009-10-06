@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "buzzcore.gemspec",
      "buzzcore.vpj",
      "buzzcore.vpw",
      "lib/buzzcore.rb",
