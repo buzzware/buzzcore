@@ -52,12 +52,12 @@ module StringUtils
 	def self.split3(aString,aPattern,aOccurence=0)
 		matches = aString.scan_md(aPattern)
 		match = matches[aOccurence]
-		parts = [match.pre_match,match.to_s,match.post_match]
+		parts = match ? [match.pre_match,match.to_s,match.post_match] : [aString,nil,'']
 
 		if !block_given?	# return head,match,tail
 			parts
 		else						# return string
-			parts[1] = yield *parts
+			parts[1] = yield *parts if match
 			parts.join
 		end
 	end

@@ -99,6 +99,18 @@ module MiscUtils
     end
   end
 
+	def self.set_permissions_cmd(aFilepath,aUser=nil,aGroup=nil,aMode=nil,aSetGroupId=false,aSudo=true)
+		cmd = []
+		if aGroup
+			cmd << (aUser ? "#{aSudo ? sudo : ''} chown #{aUser}:#{aGroup}" : "#{aSudo ? sudo : ''} chgrp #{aGroup}") + " #{aFilepath}"
+		else	
+			cmd << "#{aSudo ? sudo : ''} chown #{aUser} #{aFilepath}" if aUser
+		end
+		cmd << "#{aSudo ? sudo : ''} chmod #{aMode.to_s} #{aFilepath}" if aMode
+		cmd << "#{aSudo ? sudo : ''} chmod g+s #{aFilepath}" if aSetGroupId
+		cmd.join(' && ')
+	end
+
 	def self.string_to_file(aString,aFilename)
 		File.open(aFilename,'wb') {|file| file.puts aString }
 	end
@@ -158,6 +170,12 @@ module MiscUtils
 
 	def self.simple_dir_name(aPath)
 		File.basename(remove_slash(aPath))
+	end
+
+	def self.simple_file_name(aPath)
+		f = File.basename(aPath)
+		dot = f.index('.')
+		return dot ? f[0,dot] : f
 	end
 
 	def self.path_parts(aPath)
