@@ -87,6 +87,10 @@ String.class_eval do
 		self.scan(aPattern) {|s| result << $~ }		
 		result
 	end
+	
+	def to_nil
+		self.empty? ? nil : self
+	end
   
 end  
 
@@ -240,6 +244,10 @@ module HashUtils
 		return result
 	end
 
+	def to_nil
+		self.empty? ? nil : self
+	end
+
 end
 
 Hash.class_eval do
@@ -286,6 +294,11 @@ module ArrayUtils
     aArray ||= self
     filter_exclude!(aValues,aArray.clone)
   end
+	
+	def to_nil
+		self.empty? ? nil : self
+	end
+
 end
 
 Array.class_eval do
@@ -326,3 +339,45 @@ if defined? ActiveRecord
 	
 	end
 end
+
+Fixnum.class_eval do
+
+	def to_nil
+		self==0 ? nil : self
+	end
+
+end
+
+Bignum.class_eval do
+
+	def to_nil
+		self==0 ? nil : self
+	end
+
+end
+
+NilClass.class_eval do 
+
+	def to_nil
+		nil	
+	end
+	
+end
+
+TrueClass.class_eval do 
+
+	def to_nil
+		self	
+	end
+	
+end
+
+FalseClass.class_eval do 
+
+	def to_nil
+		nil	
+	end
+	
+end
+
+

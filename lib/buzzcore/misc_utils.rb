@@ -112,13 +112,13 @@ module MiscUtils
 	end
 
 	def self.string_to_file(aString,aFilename)
-		File.open(aFilename,'wb') {|file| file.puts aString }
+		File.open(aFilename,'wb') {|file| file.write aString }
 	end
 
 	def self.string_from_file(aFilename)
 		result = nil
 		File.open(aFilename, "rb") { |f| result = f.read }
-		return result && result[0..-2]  # quick hack to stop returning false \n at end
+		# return result && result[0..-2]  # quick hack to stop returning false \n at end UPDATE: this is causing problems now
 	end
 
 	def self.sniff_seperator(aPath)
