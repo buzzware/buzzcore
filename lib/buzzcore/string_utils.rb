@@ -62,5 +62,22 @@ module StringUtils
 		end
 	end
 
+	# truncates a string to the given length by looking for the previous space.
+	def self.word_safe_truncate(aString,aMaxLength)
+		return nil if !aString
+		return aString if aString.length <= aMaxLength
+		posLastSpace = aString.rindex(/[ \t]/,aMaxLength)
+		return aString[0,aMaxLength] if !posLastSpace
+		aString[0,posLastSpace]
+	end
+	
+	# replaces all tabs with spaces, and reduces multiple spaces to a single space	
+	def self.reduce_whitespace(aText)
+		aText = aText.gsub("\t"," ")	# replace tabs with spaces
+		aText.strip!
+		aText.squeeze!(' ')
+		aText
+	end
+
 end
 
