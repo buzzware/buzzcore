@@ -12,8 +12,6 @@ begin
     gem.authors = ["buzzware"]
     #gem.rubyforge_project = "buzzware"
 		gem.add_dependency "shairontoledo-popen4"
-		gem.add_dependency "nokogiri"
-		gem.add_dependency "sanitize"
     gem.add_development_dependency "thoughtbot-shoulda"
 		gem.files.include %w(
 			lib/buzzcore.rb

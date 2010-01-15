@@ -1,4 +1,4 @@
-require 'nokogiri'
+gem 'nokogiri'; require 'nokogiri'
 require 'buzzcore/misc_utils'
 
 module XmlUtils2

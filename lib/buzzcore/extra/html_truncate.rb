@@ -1,4 +1,5 @@
-require 'sanitize'
+gem 'sanitize'; require 'sanitize'
+gem 'nokogiri'; require 'nokogiri'
 
 module HtmlUtils
 
