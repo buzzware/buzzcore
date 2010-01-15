@@ -14,7 +14,14 @@ module XmlUtils2
 
 	def self.clean_data(aXmlString)
 		doc = Nokogiri::XML(aXmlString) {|c| c.options ||= Nokogiri::XML::ParseOptions.NOBLANKS}
-		doc.traverse {|n| n.remove if n.is_a?(Nokogiri::XML::Comment) || n.is_a?(Nokogiri::XML::Text) }
+		doc.traverse do |n| 
+			case 
+				when n.is_a?(Nokogiri::XML::Comment)
+					n.remove
+				when n.is_a?(Nokogiri::XML::Text)
+					n.remove if (n.next || n.previous) && n.content.strip.empty?
+			end
+		end
 		doc.to_xml(:indent => 0)
 	end
 
