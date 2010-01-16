@@ -163,8 +163,42 @@ module MiscUtils
 		return aPath if !aBasePath
 		return path_relative?(aPath) ? File.join(aBasePath,aPath) : aPath	
 	end
+	
+	# make path real according to file system
+	def self.real_path(aPath)
+		(path = Pathname.new(File.expand_path(aPath))) && path.realpath
+	end
+
+	# takes a path and combines it with a root path (which defaults to Dir.pwd) unless it is absolute
+	# the final result is then expanded
+	def self.canonize_path(aPath,aRootPath=nil)
+		path = path_combine(aRootPath,aPath)
+		path = real_path(path) if path
+		path
+	end
+	
+	def self.find_upwards(aStartPath,aPath)
+		curr_path = File.expand_path(aStartPath)
+		while curr_path && !(test_path_exists = File.exists?(test_path = File.join(curr_path,aPath))) do
+			curr_path = MiscUtils.path_parent(curr_path)
+		end
+		curr_path && test_path_exists ? test_path : nil
+	end
+
+
+	# allows special symbols in path
+	# currently only ... supported, which looks upward in the filesystem for the following relative path from the basepath
+	def self.expand_magic_path(aPath,aBasePath=nil)
+		aBasePath ||= Dir.pwd
+		path = aPath
+		if path.begins_with?('...')
+			rel_part = StringUtils.split3(path,/\.\.\.[\/\\]/)[2]
+			path = find_upwards(aBasePath,rel_part)
+		end
+	end
 
 	def self.path_parent(aPath)
+		return nil if is_root_path?(aPath)
 		MiscUtils.append_slash(File.dirname(MiscUtils.remove_slash(File.expand_path(aPath))))
 	end
 
@@ -214,6 +248,14 @@ module MiscUtils
 		/^[a-zA-Z0-9+_]+\:\/\// =~ aString ? true : false
 	end
 
+	def self.is_root_path?(aPath)
+		if is_windows?
+			(aPath =~ /^[a-zA-Z]\:[\\\/]$/)==0
+		else
+			aPath == '/'
+		end
+	end
+
 	def self.native_path(aPath)
 		is_windows? ? windows_path(aPath) : ruby_path(aPath)
 	end
@@ -230,14 +272,6 @@ module MiscUtils
 
 	def self.is_windows?
 		platform=='mswin32'
-	end
-
-	# takes a path and combines it with a root path (which defaults to Dir.pwd) unless it is absolute
-	# the final result is then expanded
-	def self.canonize_path(aPath,aRootPath=nil)
-		path = Pathname.new(aPath)
-		path = Pathname.new(aRootPath || Dir.pwd)+path if path.relative?
-		File.expand_path(path)
 	end
 	
 	def self.get_files(aArray,aPath,aFullPath=true,aRootPath=nil,&block)
