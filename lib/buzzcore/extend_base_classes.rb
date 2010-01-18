@@ -381,3 +381,13 @@ FalseClass.class_eval do
 end
 
 
+Math.module_eval do
+  def self.max(a, b)
+    a > b ? a : b
+  end
+
+  def self.min(a, b)
+    a < b ? a : b
+  end
+end
+

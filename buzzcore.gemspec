@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{buzzcore}
-  s.version = "0.3.1"
+  s.version = "0.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["buzzware"]
-  s.date = %q{2010-01-16}
+  s.date = %q{2010-01-19}
   s.description = %q{buzzcore is the ruby core library developed and used by Buzzware Solutions.}
   s.email = %q{contact@buzzware.com.au}
   s.extra_rdoc_files = [
@@ -47,6 +47,7 @@ Gem::Specification.new do |s|
      "test/buzzcore_test.rb",
      "test/config_test.rb",
      "test/credentials_test.rb",
+     "test/misc_test.rb",
      "test/shell_test.rb",
      "test/test_helper.rb"
   ]
