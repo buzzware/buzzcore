@@ -188,15 +188,26 @@ module XmlUtils
 	def self.quick_remove_att(aTagStr,aAtt)
 		aTagStr.sub(/#{aAtt}=['"](.*?)['"]/,'')
 	end
-	
+
 	def self.quick_append_att(aTagStr,aAtt,aValue)
+		existing_content = quick_att_from_tag(aTagStr,aAtt).to_s
+		quick_set_att(aTagStr,aAtt,existing_content+aValue)
+	end
+	
+	def self.quick_join_att(aTagStr,aAtt,aValue,aSep=';')
+		existing_content = quick_att_from_tag(aTagStr,aAtt).to_s.split(aSep)
+		existing_content += aValue.to_s.split(aSep)
+		quick_set_att(aTagStr,aAtt,existing_content.join(aSep))
+	end	
+	
+	def self.quick_add_att(aTagStr,aAtt,aValue)
 		# replace first > or /> with att + ending
 		aTagStr.sub(/(>|\/>)/," #{aAtt}=\"#{aValue}\""+' \1')
-	end
+	end	
 	
 	def self.quick_set_att(aTagStr,aAtt,aValue)
 		result = quick_remove_att(aTagStr,aAtt)
-		quick_append_att(result,aAtt,aValue)
+		quick_add_att(result,aAtt,aValue)
 	end
 
 end
