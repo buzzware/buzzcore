@@ -166,7 +166,7 @@ module MiscUtils
 	
 	# make path real according to file system
 	def self.real_path(aPath)
-		(path = Pathname.new(File.expand_path(aPath))) && path.realpath
+		(path = Pathname.new(File.expand_path(aPath))) && path.realpath.to_s
 	end
 
 	# takes a path and combines it with a root path (which defaults to Dir.pwd) unless it is absolute
