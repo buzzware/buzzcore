@@ -98,11 +98,13 @@ String.class_eval do
 	end
   
 	# uses 
-	URLIZE_PATTERN = /[ \/\\\(\)\[\]]/
+	#URLIZE_PATTERN = /[ \/\\\(\)\[\]]/
 	URLIZE_PATTERN_PS = /[ \\\(\)\[\]]/
-	def urlize(aPreserveSlashes=false)
+	def urlize(aSlashChar='+')
 		return self if self.empty?
-		self.gsub((aPreserveSlashes ? URLIZE_PATTERN_PS : URLIZE_PATTERN),'_').underscore.gsub(/[^a-z0-9_\-\/]/,'')
+		result = self.gsub(URLIZE_PATTERN_PS,'-').downcase.gsub(/[^a-z0-9_\-+,\.\/]/,'')
+		result.gsub!('/',aSlashChar) unless aSlashChar=='/'
+		result
 	end	
   
 end  

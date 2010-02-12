@@ -29,7 +29,7 @@ module HtmlUtils
 		aValues = [aValues] unless aValues.is_a? Array
 		aValues = aValues.map {|f| f.to_s.strip }
 		aValues.delete_if {|v| v.empty? }
-		aValues.join('_').urlize.gsub(/_{2,}/,'_')
+		aValues.join('-').urlize.gsub(/-{2,}/,'-')
 	end
 end
 
