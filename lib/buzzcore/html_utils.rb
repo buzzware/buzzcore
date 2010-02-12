@@ -25,5 +25,11 @@ module HtmlUtils
 		result
 	end
 
+	def self.url_name_from(*aValues)
+		aValues = [aValues] unless aValues.is_a? Array
+		aValues = aValues.map {|f| f.to_s.strip }
+		aValues.delete_if {|v| v.empty? }
+		aValues.join('_').urlize.gsub(/_{2,}/,'_')
+	end
 end
 

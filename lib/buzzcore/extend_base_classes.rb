@@ -88,9 +88,22 @@ String.class_eval do
 		result
 	end
 	
-	def to_nil
-		self.empty? ? nil : self
+	def to_nil(aPattern=nil)
+		return nil if self.empty?
+		if aPattern
+			return nil if (aPattern.is_a? Regexp) && (self =~ aPattern)
+			return nil if aPattern.to_s == self			
+		end
+		self
 	end
+  
+	# uses 
+	URLIZE_PATTERN = /[ \/\\\(\)\[\]]/
+	URLIZE_PATTERN_PS = /[ \\\(\)\[\]]/
+	def urlize(aPreserveSlashes=false)
+		return self if self.empty?
+		self.gsub((aPreserveSlashes ? URLIZE_PATTERN_PS : URLIZE_PATTERN),'_').underscore.gsub(/[^a-z0-9_\-\/]/,'')
+	end	
   
 end  
 
