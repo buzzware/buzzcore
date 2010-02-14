@@ -25,11 +25,16 @@ module HtmlUtils
 		result
 	end
 
-	def self.url_name_from(*aValues)
+	def self.gen_seo_title(*aValues)
 		aValues = [aValues] unless aValues.is_a? Array
 		aValues = aValues.map {|f| f.to_s.strip }
 		aValues.delete_if {|v| v.empty? }
-		aValues.join('-').urlize.gsub(/-{2,}/,'-')
+		aValues.join(' ').gsub(/ {2,}/,' ')
 	end
+
+	def self.url_name_from(*aValues)
+		gen_seo_title(*aValues).urlize	
+	end
+	
 end
 

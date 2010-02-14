@@ -168,6 +168,10 @@ Time.class_eval do
 		self.strftime('%Y%m%d')
 	end
 	
+	def to_universal
+		self.strftime("%d %b %Y")	
+	end
+	
 	# create a new Time from eg. "20081231"
 	def self.from_date_numeric(aString)
 		return nil unless aString
