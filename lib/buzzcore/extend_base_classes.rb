@@ -96,6 +96,12 @@ String.class_eval do
 		end
 		self
 	end
+	
+	def to_b(aDefault=false)
+		return true if ['1','yes','y','true','on'].include?(self.downcase)
+		return false if ['0','no','n','false','off'].include?(self.downcase)
+		aDefault
+	end
   
 	# uses 
 	#URLIZE_PATTERN = /[ \/\\\(\)\[\]]/
@@ -365,12 +371,20 @@ Fixnum.class_eval do
 		self==0 ? nil : self
 	end
 
+	def to_b(aDefault=false)
+		self==0 ? false : true
+	end
+
 end
 
 Bignum.class_eval do
 
 	def to_nil
 		self==0 ? nil : self
+	end
+	
+	def to_b(aDefault=false)
+		self==0 ? false : true
 	end
 
 end
@@ -381,6 +395,10 @@ NilClass.class_eval do
 		nil	
 	end
 	
+	def to_b(aDefault=false)
+		false
+	end
+	
 end
 
 TrueClass.class_eval do 
@@ -389,6 +407,10 @@ TrueClass.class_eval do
 		self	
 	end
 	
+	def to_b(aDefault=false)
+		self
+	end	
+	
 end
 
 FalseClass.class_eval do 
@@ -396,6 +418,10 @@ FalseClass.class_eval do
 	def to_nil
 		nil	
 	end
+	
+	def to_b(aDefault=false)
+		self
+	end	
 	
 end
 
