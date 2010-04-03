@@ -76,6 +76,7 @@ class ConfigClass < Hash
 			when :Fixnum then set_int(aKey,aHash[aKey]);
 			when :TrueClass, :FalseClass then set_boolean(aKey,aHash[aKey]);
 			when :Symbol then self[aKey] = (aHash[aKey].to_sym rescue nil)
+			when :Proc then self[aKey] = aHash[aKey] if aHash[aKey].is_a?(Proc)
 			else
 				raise StandardError.new('unsupported type')
 		end
