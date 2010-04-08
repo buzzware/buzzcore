@@ -20,7 +20,7 @@ module Buzzcore
 		@@switch = {}
 		@@switch_default = {}
 
-		cattr_accessor :rails_config
+		#cattr_accessor :rails_config
 
 		# load all tweaks from a path
 		def self.load_all(aPath)
@@ -35,17 +35,21 @@ module Buzzcore
 		def self.load(aTweakFile)
 			#name = aTweakFile.scan(/.*\/(.+)_tweak\.rb$/).flatten.pop
 			#@@tweaks[name.to_sym] = Tweak.new(name)
-			::Kernel.load(aTweakFile)
+			if defined? Rails
+				require_dependency aTweakFile
+			else
+				::Kernel.load(aTweakFile)
+			end
 		end
 		
-		def self.enable(aTweakNames)
+		def self.enable(*aTweakNames)
 			aTweakNames = [aTweakNames] unless aTweakNames.is_a?(Array)
 			aTweakNames.each do |n|
 				@@switch[n.to_sym] = true
 			end
 		end
 
-		def self.disable(aTweakNames)
+		def self.disable(*aTweakNames)
 			aTweakNames = [aTweakNames] unless aTweakNames.is_a?(Array)
 			aTweakNames.each do |n|
 				@@switch[n.to_sym] = false

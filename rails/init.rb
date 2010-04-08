@@ -10,7 +10,7 @@
 #end
 #
 config.after_initialize do
-	Buzzcore::Tweaks.rails_config = config
+	#Buzzcore::Tweaks.rails_config = config
 	Buzzcore::Tweaks.load_all(File.join(File.dirname(__FILE__),'../tweaks'))
 	Buzzcore::Tweaks.load_all(File.join(RAILS_ROOT,'tweaks'))
 end
