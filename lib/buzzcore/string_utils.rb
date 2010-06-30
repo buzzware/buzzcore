@@ -7,6 +7,18 @@ module StringUtils
 		return aEllipsis ? aString[0,aLength-3]+'...' : aString[0,aLength]
   end
 
+	def self.simplify_whitespace(aText)
+		aText.gsub(/[ \n\t\r]+/,' ').strip
+	end
+
+	def self.crop_to_word_count(aText,aWordCount)
+		aText = simplify_whitespace(aText)
+		matches = aText.scan_md(/[^\w-]+/)
+		match = matches[aWordCount-1]
+		result = (match ? match.pre_match : aText)
+		result
+	end
+
 	# aTemplate is a string containing tokens like ${SOME_TOKEN}
 	# aValues is a hash of token names eg. 'SOME_TOKEN' and their values to substitute
 	def self.render_template(aTemplate,aValues)

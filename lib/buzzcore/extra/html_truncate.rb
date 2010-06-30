@@ -24,5 +24,12 @@ module HtmlUtils
 		result
 	end
 	
+	def self.html_to_plain(aHtml)
+		return '' if !aHtml
+		aHtml = StringUtils.simplify_whitespace(aHtml)
+		aHtml = Sanitize.clean(aHtml)
+		StringUtils.simplify_whitespace(aHtml)
+	end
+
 end
 	
