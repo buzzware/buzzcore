@@ -3,7 +3,7 @@ require 'buzzcore/misc_utils'
 require 'buzzcore/config'
 require 'buzzcore/shell_extras'
 require 'test/unit'
-gem 'Shoulda'; require 'shoulda'
+gem 'shoulda'; require 'shoulda'
 require 'fileutils'
 
 class CredentialsTest < Test::Unit::TestCase

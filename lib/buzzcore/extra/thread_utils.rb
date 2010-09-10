@@ -3,7 +3,7 @@ require 'timeout'
 require 'tmpdir'
 require 'fileutils'
 require 'thread'
-require 'fastthread'
+#require 'fastthread'
 
 # 	# This class provides an object value that can be passed between threads without
 # 	# fear of collisions. As WaitOne is used, multiple consumers could wait on one producer,

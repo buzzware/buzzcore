@@ -6,10 +6,9 @@ $:.unshift File.join(File.dirname(__FILE__),'..','lib')
 require 'rubygems'
 
 require 'test/unit'
-gem 'Shoulda'; require 'shoulda'
+gem 'shoulda'; require 'shoulda'
 
 require 'buzzcore/shell_extras'
-require 'yore/yore_core'
 
 class ShellTest < Test::Unit::TestCase
   should "raise exception on timeout"

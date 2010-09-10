@@ -1,5 +1,4 @@
-gem 'Platform'; require 'platform'
-gem 'shairontoledo-popen4'; require 'popen4'
+gem 'POpen4'; require 'POpen4'
 
 module POpen4
 

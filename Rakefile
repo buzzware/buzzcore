@@ -11,7 +11,7 @@ begin
     gem.homepage = "http://github.com/buzzware/buzzcore"
     gem.authors = ["buzzware"]
     #gem.rubyforge_project = "buzzware"
-		gem.add_dependency "shairontoledo-popen4"
+		gem.add_dependency "POpen4"
     gem.add_development_dependency "shoulda"
 		gem.files.include %w(
 			lib/buzzcore.rb
