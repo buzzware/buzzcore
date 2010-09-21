@@ -1,4 +1,4 @@
-gem 'POpen4'; require 'POpen4'
+gem 'POpen4'; require 'popen4'
 
 module POpen4
 
