@@ -41,7 +41,6 @@ Gem::Specification.new do |s|
      "lib/buzzcore/shell_extras.rb",
      "lib/buzzcore/string_utils.rb",
      "lib/buzzcore/text_doc.rb",
-     "lib/buzzcore/tweaks.rb",
      "lib/buzzcore/xml_utils.rb",
      "lib/buzzcore_dev.rb",
      "rails/init.rb",
