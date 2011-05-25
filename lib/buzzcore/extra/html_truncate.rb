@@ -30,6 +30,17 @@ module HtmlUtils
 		aHtml = Sanitize.clean(aHtml)
 		StringUtils.simplify_whitespace(aHtml)
 	end
+	
+	def self.plain_words(aHtmlText,aWords)
+		result = CGI.unescapeHTML(Sanitize.clean(aHtmlText))
+		StringUtils.crop_to_word_count(result,aWords)
+	end
+
+	def self.plain_chars(aHtmlText,aMaxLength)
+		result = CGI.unescapeHTML(Sanitize.clean(aHtmlText))
+		result = StringUtils.simplify_whitespace(result)
+		StringUtils.word_safe_truncate(result,aMaxLength)
+	end
 
 end
 	

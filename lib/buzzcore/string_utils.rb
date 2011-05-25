@@ -18,6 +18,13 @@ module StringUtils
 		result = (match ? match.pre_match : aText)
 		result
 	end
+	
+	def self.random_word(min,max)
+		len = min + rand(max-min+1)
+		result = ' '*len
+		(len-1).downto(0) {|i| result[i] = (?a + rand(?z-?a+1)).chr}
+		return result
+	end
 
 	# aTemplate is a string containing tokens like ${SOME_TOKEN}
 	# aValues is a hash of token names eg. 'SOME_TOKEN' and their values to substitute

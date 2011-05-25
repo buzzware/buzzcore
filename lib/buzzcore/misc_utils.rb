@@ -91,12 +91,9 @@ module MiscUtils
 		return new_dir
 	end
 	
-	def self.mkdir?(aPath,aPermissions)
-		if File.exists?(aPath)
-			File.chmod(aPermissions, aPath)
-		else
-			Dir.mkdir(aPath, aPermissions)
-    end
+	def self.mkdir?(aPath,aPermissions=nil)
+		FileUtils.mkdir_p(aPath) unless File.exists?(aPath)
+		File.chmod(aPermissions, aPath) if aPermissions
   end
 
 	def self.set_permissions_cmd(aFilepath,aUser=nil,aGroup=nil,aMode=nil,aSetGroupId=false,aSudo=true)
