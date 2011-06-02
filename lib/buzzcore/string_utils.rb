@@ -97,6 +97,14 @@ module StringUtils
 		aText.squeeze!(' ')
 		aText
 	end
+	
+	def self.clean_tag(aTag)
+		aTag.downcase.gsub('_','-').gsub(/[^a-z0-9-]/,'').bite('-').chomp('-')
+	end
+	
+	def self.clean_tags(aTags)
+		aTags.map {|t| clean_tag(t)}.uniq
+	end
 
 end
 
