@@ -79,7 +79,31 @@ module DatabaseUtils
 	#end
 
 
+	# remember to select id column
+	def self.process_rows(aTableName,aQuery)
+		rows = ActiveRecord::Base.connection.execute(aQuery).all_hashes
+		# rows to hash
+		rows.each do |r| 
+			before = r.clone
+			yield(r)	# modify r
+			r[:delete] = true if r == before
+		end
+		rows.delete_if {|r| r[:delete]}
+		rows.each do |r| 
+			assigns = ''
+			r.keys.filter_exclude(['id']).each do |k|
+				assigns += ', ' unless assigns.empty?
+				assigns += "#{k} = '#{r[k]}'"						# should do better escaping here for strings & numbers
+			end
+			ActiveRecord::Base.connection.execute("update `#{aTableName}` set #{assigns} where id=#{r['id']}")
+		end	
+	end
 
+	def self.process_table(aTableName,aColumns,&block)
+		aColumns.map!(&:to_s)
+		aColumns << 'id' unless aColumns.include? 'id'
+		process_rows(aTableName,"select #{aColumns.join(',')} from `#{aTableName}`",&block)
+	end
 
 end
 

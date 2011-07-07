@@ -103,14 +103,25 @@ String.class_eval do
 		aDefault
 	end
 
-	# uses
-	#URLIZE_PATTERN = /[ \/\\\(\)\[\]]/
-	URLIZE_PATTERN_PS = /[ \\\(\)\[\]_]/
-	def urlize(aSlashChar='+')
+	URLIZE_PATTERN_PS = /[ \\\(\)\[\]]/
+	URLIZE_EXTENSIONS = %w(html htm jpg jpeg png gif bmp mov avi mp3 zip pdf css js doc xdoc)
+	
+	# aKeepExtensions may be an array of extensions to keep, or :none (will remove periods) or :all (any extension <= 4 chars)
+	def urlize(aSlashChar='+',aKeepExtensions=URLIZE_EXTENSIONS)
 		return self if self.empty?
-		result = self.gsub(URLIZE_PATTERN_PS,'-').downcase.gsub(/[^a-z0-9_\-+,\.\/]/,'').sub(/-+$/,'').sub(/^-+/,'')
+		result = self.gsub(URLIZE_PATTERN_PS,'-').downcase
+		ext = nil
+		if (aKeepExtensions!=:none) && last_dot = result.rindex('.')	
+			if (ext_len = result.length-last_dot-1) <= 4	# preserve extension without dot if <= 4 chars long
+				ext = result[last_dot+1..-1]
+				ext = nil unless aKeepExtensions==:all || (aKeepExtensions.is_a?(Array) && aKeepExtensions.include?(ext))
+				result = result[0,last_dot] if ext
+			end
+		end
+		result = result.gsub(/[^a-z0-9\_\-+~\/]/,'').sub(/-+$/,'').sub(/^-+/,'')
 		result.gsub!('/',aSlashChar) unless aSlashChar=='/'
 		result.gsub!(/-{2,}/,'-')
+		result += '.'+ext if ext
 		result
 	end
 
@@ -159,6 +170,9 @@ String.class_eval do
 		crc
 	end
 
+	def has_tags?
+		index(/<[a-zA-Z\-:0-9]+(\b|>)/) && (index('/>') || index('</'))		# contains an opening and closing tag
+	end
 
 end
 
