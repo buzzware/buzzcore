@@ -103,13 +103,17 @@ String.class_eval do
 		aDefault
 	end
 
-	URLIZE_PATTERN_PS = /[ \\\(\)\[\]]/
+	# "...Only alphanumerics [0-9a-zA-Z], the special characters "$-_.+!*'()," [not including the quotes - ed], and reserved characters used for their reserved purposes may be used unencoded within a URL."	
+
+	URLIZE_SEPARATORS = /[ \\\(\)\[\]\.*,]/	# was /[ \\\(\)\[\]\.*,]/
 	URLIZE_EXTENSIONS = %w(html htm jpg jpeg png gif bmp mov avi mp3 zip pdf css js doc xdoc)
-	
+	URLIZE_REMOVE = /[^a-z0-9\_\-+~\/]/ # was 'a-z0-9_-+~/'
 	# aKeepExtensions may be an array of extensions to keep, or :none (will remove periods) or :all (any extension <= 4 chars)
-	def urlize(aSlashChar='+',aKeepExtensions=URLIZE_EXTENSIONS)
+	def urlize(aSlashChar='+',aRemove=nil,aKeepExtensions=nil)
+		aKeepExtensions=URLIZE_EXTENSIONS if !aKeepExtensions
+		aRemove=URLIZE_REMOVE if !aRemove
 		return self if self.empty?
-		result = self.gsub(URLIZE_PATTERN_PS,'-').downcase
+		result = self.downcase
 		ext = nil
 		if (aKeepExtensions!=:none) && last_dot = result.rindex('.')	
 			if (ext_len = result.length-last_dot-1) <= 4	# preserve extension without dot if <= 4 chars long
@@ -118,7 +122,9 @@ String.class_eval do
 				result = result[0,last_dot] if ext
 			end
 		end
-		result = result.gsub(/[^a-z0-9\_\-+~\/]/,'').sub(/-+$/,'').sub(/^-+/,'')
+		
+		result = result.gsub(URLIZE_SEPARATORS,'-')
+		result = result.gsub(aRemove,'').sub(/-+$/,'').sub(/^-+/,'')
 		result.gsub!('/',aSlashChar) unless aSlashChar=='/'
 		result.gsub!(/-{2,}/,'-')
 		result += '.'+ext if ext
