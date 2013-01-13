@@ -140,6 +140,14 @@ module MiscUtils
 		return aPath
 	end
 
+	def self.ensure_prefix(aString,aPrefix)
+		aString.begins_with?(aPrefix) ? aString : aPrefix+aString
+	end
+
+	def self.ensure_suffix(aString,aSuffix)
+		aString.ends_with?(aSuffix) ? aString : aString+aSuffix
+	end
+
 	# Remove base dir from given path. Result will be relative to base dir and not have a leading or trailing slash
 	#'/a/b/c','/a' = 'b/c'
 	#'/a/b/c','/' = 'a/b/c'

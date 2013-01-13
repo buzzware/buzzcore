@@ -201,8 +201,9 @@ class Credentials < Hash
 	def get_all_credentials(aXmlRoot)
 		return nil unless aXmlRoot
 		result = {}
-		REXML::XPath.each(aXmlRoot, '/Credentials/SimpleItems') do |si|
-			ns = si.attributes['Namespace']
+		simpleItemses = aXmlRoot.get_elements('SimpleItems') + aXmlRoot.get_elements('simpleItems')
+		simpleItemses.each do |si|
+			ns = si.attributes['namespace'] || si.attributes['Namespace']
 			values = XmlUtils.read_simple_items(si)
 			result[ns.to_sym] = values.symbolize_keys if ns && values
 		end

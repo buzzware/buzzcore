@@ -38,6 +38,12 @@ module XmlUtils
     return val.nil? ? default : val.to_s
   end
 
+	def self.attr(aNode,aName,aDefault=nil)
+		return aDefault unless aNode && aName
+		a = aNode.attribute(aName.to_s)
+		a ? a.to_s : aDefault
+	end
+
   def self.peek_node_value(aNode,aXPath,aDefault=nil)
 		node = single_node(aNode,aXPath)
 		return node.to_s if node.is_a?(REXML::Attribute)
@@ -96,9 +102,12 @@ module XmlUtils
 
 	def self.read_simple_items(aRoot,aParentXPath=nil)
 		result = {}
-		xp = aParentXPath ? File.join(aParentXPath,'Item') : 'Item'
-		REXML::XPath.each(aRoot, xp) do |item|
-			result[item.attribute('Name').to_s] = item.text
+		#xp = aParentXPath ? File.join(aParentXPath,'Item') : 'Item'
+		items = aParentXPath ? aRoot.get_elements(aParentXPath) : aRoot.elements.to_a
+		items.each do |item|
+			next unless item.name=='Item' || item.name=='item'
+			name = (item.attribute('name')||item.attribute('Name')).to_s
+			result[name] = item.text
     end
 		return result
 	end

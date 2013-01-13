@@ -19,12 +19,40 @@ String.class_eval do
 		end
 	end
 
+	# Like bite, but returns the first match instead of the subject
+	def extract!(aValue=$/,aString=self)
+		if aValue.is_a? String
+			if aString[0,aValue.length] == aValue
+				aString[0,aValue.length] = ''
+				return aValue
+			else
+				return nil
+			end
+		elsif aValue.is_a? Regexp
+			if md = aValue.match(aString)
+				aString[md.begin(0),md.end(0)-md.begin(0)] = ''
+				return md.to_s
+			else
+				return nil
+			end
+		else
+			return aString
+		end
+	end
+
+
 	# Like chomp! but operates on the leading characters instead.
 	# The aString parameter would not normally be used.
 	def bite!(aValue=$/,aString=self)
-		if aString[0,aValue.length] == aValue
-			aString[0,aValue.length] = ''
-			return aString
+		if aValue.is_a? String
+			if aString[0,aValue.length] == aValue
+				aString[0,aValue.length] = ''
+				return aString
+			else
+				return aString
+			end
+		elsif aValue.is_a? Regexp
+			return aString.sub!(aValue,'') if aString.index(aValue)==0
 		else
 			return aString
 		end
