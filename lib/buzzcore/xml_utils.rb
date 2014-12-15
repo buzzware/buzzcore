@@ -102,8 +102,11 @@ module XmlUtils
 
 	def self.read_simple_items(aRoot,aParentXPath=nil)
 		result = {}
-		#xp = aParentXPath ? File.join(aParentXPath,'Item') : 'Item'
-		items = aParentXPath ? aRoot.get_elements(aParentXPath) : aRoot.elements.to_a
+		items = if aParentXPath
+			aRoot.get_elements(aParentXPath + '/Item')
+		else
+			aRoot.elements.to_a
+		end
 		items.each do |item|
 			next unless item.name=='Item' || item.name=='item'
 			name = (item.attribute('name')||item.attribute('Name')).to_s
